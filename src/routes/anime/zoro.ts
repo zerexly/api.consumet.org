@@ -187,11 +187,11 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         )
         .catch((err) => reply.status(404).send({ message: err }));
 
-      reply.status(200).send(res);
+      return reply.status(200).send(res);
     } catch (err) {
-      reply
-        .status(500)
-        .send({ message: 'Something went wrong. Contact developer for help.' });
+      return reply.status(404).send({
+      message: err instanceof Error ? err.message : 'Episode source fetch failed',
+    });
     }
   };
   fastify.get('/watch', watch);
