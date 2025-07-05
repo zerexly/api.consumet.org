@@ -187,7 +187,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         )
         .catch((err) => reply.status(404).send({ message: err }));
 
-      return reply.status(200).send(res);
+      reply.status(200).send(res);
     } catch (err) {
       return reply.status(404).send({
       message: err instanceof Error ? err.message : 'Episode source fetch failed',
